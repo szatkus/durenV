@@ -1,0 +1,1 @@
+/home/szatkus/Projekty/durenV/e1/rpgdb.py
