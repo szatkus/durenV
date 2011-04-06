@@ -1,10 +1,16 @@
 from attribute import *
+import random
 
 class Character:
 	
 	def __init__(self, name):
 		self.name = name
 		self.attrib = {}
+		self.hp = 0
+		self.max_hp = 0
+		self.ready = 0
+		self.team = 1
+		self.fight = None
 	
 	def add(self, attrib):
 		for name in self.attrib:
@@ -24,3 +30,8 @@ class Character:
 		if len(result) == 0:
 			result = [null_attrib]
 		return result
+	
+	def damage(self, dmg):
+		dmg = (0.5+random.random())*dmg
+		self.life -= dmg
+		return dmg

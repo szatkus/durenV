@@ -9,6 +9,7 @@ class Attribute(object):
 		self.dep = []
 		self.affect = []
 		self.mod = None
+		self.check = None
 		self.exp = 0
 		self.atype = ""
 	

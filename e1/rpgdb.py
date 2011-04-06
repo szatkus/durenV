@@ -1,4 +1,8 @@
 import extsea
+import random
+
+def message(m):
+	print(m)
 
 def view(a):
 	print(a.name)
@@ -10,6 +14,26 @@ def viewc(c):
 	for n in c.attrib:
 		a = c.attrib[n]
 		print("%d(%d) %s"%(a.rlevel, a.level, a.name))
+
+def random_range(a, b):
+	if (a == b):
+		return a
+	return random.randint(a, b)
+
+def ai_dumb(char, battle):
+	message("%s %d/%d"%(char.name, char.life, char.max_life))
+	attack = []
+	for name in char.attrib:
+		if char.attrib[name].atype == "attack":
+			attack.append(char.attrib[name])
+	if len(attack) > 0:
+		target = char
+		while target == char:
+			target = battle.char[random_range(1, len(battle.char))-1]
+		i = random_range(1, len(attack))-1
+		print(len(attack))
+		attack[i].use(attack[i], char, target)
+	raw_input()
 
 def create(name):
 	#Strength
@@ -115,8 +139,9 @@ def create(name):
 	if name == "bite":
 		bite = extsea.Attribute("bite")
 		bite.deps = ["strength"]
-		def bite_use(self, mod):
-			mod.tbonus *= 1.2
+		def bite_use(self, user, target):
+			dmg = target.damage(self.level)
+			message("%s lost %d HP."%(target.name, dmg))
 		bite.use = bite_use
 		bite.atype = "attack"
 		return(bite)
@@ -137,6 +162,8 @@ def create_monster(name):
 		wolf.add(createl("strength", 4))
 		wolf.add(createl("speed", 4))
 		wolf.add(createl("life", 4))
+		wolf.add(createl("bite", 4))
+		wolf.fight = ai_dumb
 		return(wolf)
 	
 	if name == "mushroom":
@@ -145,4 +172,6 @@ def create_monster(name):
 		mushroom.add(createl("strength", 4))
 		mushroom.add(createl("speed", 4))
 		mushroom.add(createl("life", 4))
+		mushroom.add(createl("bite", 4))
+		mushroom.fight = ai_dumb
 		return(mushroom)

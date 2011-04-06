@@ -13,7 +13,6 @@ c.add(rpgdb.create("human"))
 
 w = rpgdb.create_monster("wolf")
 m = rpgdb.create_monster("mushroom")
-
-rpgdb.viewc(w)
-print(w.attrib["speed"].dep[0].name)
-rpgdb.viewc(m)
+w.team = 2
+b = extsea.Battle([w, m])
+b.run()
