@@ -33,7 +33,7 @@ def ai_dumb(char, battle):
 		i = random_range(1, len(attack))-1
 		print(len(attack))
 		attack[i].use(attack[i], char, target)
-	raw_input()
+	input()
 
 def create(name):
 	#Strength
