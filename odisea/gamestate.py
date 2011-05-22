@@ -1,4 +1,4 @@
-from place import *
+from .place import *
 
 class GameState(Place):
 	def __init__(self):

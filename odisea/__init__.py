@@ -1,7 +1,7 @@
 """Odysea adventure engine main module
 """
 
-from game import *
+from .game import *
 
 version = "0.0.2"
 

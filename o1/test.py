@@ -3,7 +3,7 @@
 
 from odisea import *
 
-game = Game(None)
+game = Game()
 
 def cons(game):
 	game.current = Place("Start", """Początek gry

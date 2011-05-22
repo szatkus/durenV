@@ -1,12 +1,12 @@
-from object import *
-from place import *
-from gamestate import *
+from .object import *
+from .place import *
+from .gamestate import *
 from sys import *
 
 class Game:
 	"""Main game class"""	
 	
-	def __init__(self, main):
+	def __init__(self, main=[]):
 		"""The only argument is a dictionary of commands-functions.
 Functions have to have one argument - game class."""
 		self.main = main
@@ -47,7 +47,7 @@ Functions have to have one argument - game class."""
 						self.state.save(self.autosave)
 				self.state.refresh()
 				stdout.write("> ")
-				cmd = raw_input()
+				cmd = input()
 				cmd = cmd.lower()
 				
 				if cmd in self.main:
