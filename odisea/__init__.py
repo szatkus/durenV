@@ -20,17 +20,17 @@ def dialog(d):
 def isay(d):
 	"""Say something"""
 	print("["+d+"]")
-	raw_input()
+	input()
 
 def say(a, d):
 	"""Say something"""
 	print(a+": ["+d+"]")
-	raw_input()
+	input()
 
 def dialogd(d):
 	"""Shows a dialog message and waits"""
 	print(d)
-	raw_input()
+	input()
 
 def message(m):
 	"""Shows a system message"""
