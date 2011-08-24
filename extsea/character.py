@@ -6,8 +6,8 @@ class Character:
 	def __init__(self, name):
 		self.name = name
 		self.attrib = {}
-		self.hp = 0
-		self.max_hp = 0
+		self.life = 0
+		self.max_life = 0
 		self.ready = 0
 		self.team = 1
 		self.fight = None
