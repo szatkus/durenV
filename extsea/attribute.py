@@ -3,15 +3,16 @@ import math
 class Attribute(object):
 	def __init__(self, name):
 		self.name = name
+		self.title = name
 		self.multi = 3
-		self.rlevel = 1
+		self.rlevel = 1 #Real level
 		self.max_level = 255
 		self.dep = []
 		self.affect = []
 		self.mod = None
 		self.check = None
-		self.exp = 0
-		self.atype = ""
+		self.exp = 0.0
+		self.atype = "" #Ability type
 	
 	@property
 	def bonus(self):

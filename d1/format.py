@@ -2,13 +2,13 @@
 @start
 Punkt początkowy.
 Tu zaczynamy.
-	@Popierdółka
+	>Popierdółka
 		dialog("Jakaś tam popierdółka.")
 	if not game.getb("niema"):
-		@Coś
+		>Coś
 			dialog("Znika...")
 			game.tick("niema")
-	@Rucha
+	>Rucha
 		if not game.getb("ruszone"):
 			dialogd("Ruszyłem!")
 			game.tick("ruszone")

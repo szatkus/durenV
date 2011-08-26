@@ -1,6 +1,9 @@
 import extsea
 import random
 
+#This module shouldn't be used in serious project
+#But c'est la vie...
+
 def message(m):
 	print(m)
 
@@ -146,6 +149,17 @@ def create(name):
 		bite.atype = "attack"
 		return(bite)
 	
+	#Hit
+	if name == "hit":
+		hit = extsea.Attribute("hit")
+		hit.deps = ["strength"]
+		def hit_use(self, user, target):
+			dmg = target.damage(self.level)
+			message("%s lost %d HP."%(target.name, dmg))
+		hit.use = hit_use
+		hit.atype = "attack"
+		return(hit)
+	
 	return(None)
 
 def createl(name, level):
@@ -153,7 +167,6 @@ def createl(name, level):
 	if attrib != None:
 		attrib.rlevel = level
 	return(attrib)
-
 
 def create_monster(name):
 	if name == "wolf":
