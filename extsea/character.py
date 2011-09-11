@@ -5,7 +5,8 @@ class Character:
 	'''Class representing a character
 	fight - battle controller, it's just a function with two parameters,
 	current character and battle. It's called everytime character have to act
-	during battle. For example look into rpgdb.ai_dumb source.'''
+	during battle. For example look into rpgdb.ai_dumb source.
+	log - history of actions done by character'''
 	def __init__(self, name):
 		'''Constructor
 		name - name of character
@@ -20,6 +21,7 @@ class Character:
 		self.ready = 0
 		self.team = 1
 		self.fight = None
+		self.log = []
 	
 	def add(self, attrib):
 		'''Adds an attribute
@@ -35,6 +37,7 @@ class Character:
 				attrib.add(iattrib)
 		
 		self.attrib[attrib.name] = attrib
+		self.log.append('add %s %s'%(self.name, attrib.name))
 	
 	def find_attrib(self, atype):
 		'''Find attributes of specific type
@@ -65,4 +68,5 @@ class Character:
 		if 'life' in self.attrib:
 			life = self.attrib['life']
 			life.exp += dmg/life.level
+		self.log.append('damage %s %d'%(self.name, dmg))
 		return dmg

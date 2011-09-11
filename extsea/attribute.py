@@ -25,10 +25,13 @@ class Attribute(object):
 			mod.tbonus *= 4
 		if mod.name == 'speed':
 			mod.tbonus *= 5
+	use_func - function called after use, should have 3 parameters, current
+	attribute, using character and target character
 	check - to be used in future
 	exp - points of experience
 	required - points required to level up
 	atype - attribute type, for example 'gender', 'race', 'attack'
+	log - history of actions with attribute
 	'''
 	def __init__(self, name):
 		'''Constructor
@@ -41,9 +44,12 @@ class Attribute(object):
 		self.dep = []
 		self.affect = []
 		self.mod = None
+		self.log = []
+		self.use_func = None
 		self.check = None
 		self.exp = 0.0
-		self.atype = "" #Ability type
+		self.atype = '' #Ability type
+		
 	
 	@property
 	def bonus(self):
@@ -76,13 +82,30 @@ class Attribute(object):
 			if isinstance(d, Attribute):
 				d.exp += exp - self.__exp
 		self.__exp = exp
+		self.log.append('exp %s %d\n'%(self.name, exp))
 		while self.required >= 0 and self.exp >= self.required:
 			self.rlevel += 1
+			self.log.append('level %s %d'%(self.name, self.rlevel))
 	
 	def increase(self):
 		'''Increase exp slightly'''
 		self.exp += 1
 	
+	def use(self, user, target):
+		'''Use an attribute.
+		user - character which use an attribute
+		target - character which is a target
+		
+		Example:
+		herb.use(monk, geralt)'''
+		self.log.append('use %s %s %s'%(self.name, user.name, target.name))
+		self.use_func(self, user, target)
+	
+	def add(self, dep):
+		if dep.name in self.dep:
+			self.dep[self.dep.index(dep.name)] = dep
+		else:
+			self.dep.append(dep)
 
 
 null_attrib = Attribute("none")

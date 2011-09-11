@@ -11,7 +11,11 @@ class Battle(object):
 		self.time = 0
 		self.max_ready = 1
 		self.isrun = True
+		self.log = []
 		for char in self.char:
+			char.log = self.log
+			for a in char.attrib:
+				char.attrib[a].log = self.log
 			if "life" in char.attrib:
 				char.life = char.max_life = char.attrib["life"].level
 			if "speed" in char.attrib and char.attrib["speed"].level > self.max_ready:
