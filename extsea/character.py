@@ -34,4 +34,6 @@ class Character:
 	def damage(self, dmg):
 		dmg = (0.5+random.random())*dmg
 		self.life -= dmg
+		if 'life' in self.attrib:
+			self.attrib['life'].exp += dmg
 		return dmg
