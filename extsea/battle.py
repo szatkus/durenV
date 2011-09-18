@@ -26,16 +26,18 @@ class Battle(object):
 		'''Runs a battle'''
 		while self.isrun:
 			for char in self.char:
-				if "speed" in char.attrib:
-					char.ready += char.attrib["speed"].level
-					char.attrib['speed'].increase()
-				if char.ready >= self.max_ready:
-					char.ready -= self.max_ready
-					if char.fight != None:
-						char.fight(char, self)
-			for char in self.char:
-				if char.life <= 0:
-					self.char.remove(char)
+				if char.life > 0:
+					if 'speed' in char.attrib:
+						char.ready += char.attrib['speed'].level
+						char.attrib['speed'].increase()
+					if char.ready >= self.max_ready:
+						char.ready -= self.max_ready
+						if char.fight != None:
+							char.fight(char, self)
+				for char in self.char:
+					if char.life <= 0:
+						self.char.remove(char)
+						self.log.append('dead %s'%char.name)
 			team = self.char[0].team
 			self.isrun = False
 			for char in self.char:

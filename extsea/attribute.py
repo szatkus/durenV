@@ -82,7 +82,8 @@ class Attribute(object):
 			if isinstance(d, Attribute):
 				d.exp += exp - self.__exp
 		self.__exp = exp
-		self.log.append('exp %s %d\n'%(self.name, exp))
+		if self.required >= 0:
+			self.log.append('exp %s %d'%(self.name, exp))
 		while self.required >= 0 and self.exp >= self.required:
 			self.rlevel += 1
 			self.log.append('level %s %d'%(self.name, self.rlevel))
@@ -102,10 +103,12 @@ class Attribute(object):
 		self.use_func(self, user, target)
 	
 	def add(self, dep):
-		if dep.name in self.dep:
-			self.dep[self.dep.index(dep.name)] = dep
-		else:
-			self.dep.append(dep)
+		if not(dep in self.dep):
+			if dep.name in self.dep:
+				self.dep[self.dep.index(dep.name)] = dep
+			else:
+				self.dep.append(dep)
+		
 
 
 null_attrib = Attribute("none")
