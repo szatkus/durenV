@@ -16,12 +16,19 @@ class Character:
 		'''
 		self.name = name
 		self.attrib = {}
+		self.trash = {}
 		self.life = 0
 		self.max_life = 0
 		self.ready = 0
 		self.team = 1
 		self.fight = None
 		self.log = []
+	
+	def __unicode__(self):
+		return self.name
+		
+	def __str__(self):
+		return 'ExtseaCharacter: '+self.name
 	
 	def add(self, attrib):
 		'''Adds an attribute
@@ -31,13 +38,12 @@ class Character:
 		geralt.add(rpgdb.create('strength'))'''
 		for name in self.attrib:
 			iattrib = self.attrib[name]
-			if iattrib.name in attrib.affect or attrib.name in iattrib.dep:
-				iattrib.add(attrib)
-			if attrib.name in iattrib.affect or iattrib.name in attrib.dep:
-				attrib.add(iattrib)
+			iattrib.link(attrib)
+			attrib.link(iattrib)
 		
 		self.attrib[attrib.name] = attrib
 		self.log.append('add %s %s'%(self.name, attrib.name))
+					
 	
 	def find_attrib(self, atype):
 		'''Find attributes of specific type

@@ -54,13 +54,17 @@ class Attribute(object):
 	@property
 	def bonus(self):
 		self.tbonus = 1
+		#print(self.dep)
 		for d in self.dep:
+			
 			if isinstance(d, Attribute) and d.mod != None:
+				
 				d.mod(d, self)
 		return self.tbonus
 	
 	@property
 	def level(self):
+		#print('a'+self.name)
 		if self.rlevel > self.max_level:
 			self.rlevel = self.max_level
 		return self.rlevel*self.bonus
@@ -102,12 +106,11 @@ class Attribute(object):
 		self.log.append('use %s %s %s'%(self.name, user.name, target.name))
 		self.use_func(self, user, target)
 	
-	def add(self, dep):
-		if not(dep in self.dep):
-			if dep.name in self.dep:
-				self.dep[self.dep.index(dep.name)] = dep
-			else:
-				self.dep.append(dep)
+	def link(self, attribute):
+		if self.name in attribute.affect:
+			self.dep.append(attribute)
+		if attribute.name in self.dep:
+			self.dep[self.dep.index(attribute.name)] = attribute
 		
 
 
