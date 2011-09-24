@@ -35,8 +35,10 @@ class Character:
 				iattrib.add(attrib)
 			if attrib.name in iattrib.affect or iattrib.name in attrib.dep:
 				attrib.add(iattrib)
-		
-		self.attrib[attrib.name] = attrib
+		if attrib.atype == 'item' and attrib.name in self.attrib:
+			self.attrib[attrib.name].rlevel += attrib.rlevel
+		else:
+			self.attrib[attrib.name] = attrib
 		self.log.append('add %s %s'%(self.name, attrib.name))
 	
 	def find_attrib(self, atype):
