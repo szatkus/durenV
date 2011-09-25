@@ -38,10 +38,21 @@ class Character:
 		geralt.add(rpgdb.create('strength'))'''
 		for name in self.attrib:
 			iattrib = self.attrib[name]
+<<<<<<< HEAD
 			iattrib.link(attrib)
 			attrib.link(iattrib)
 		
 		self.attrib[attrib.name] = attrib
+=======
+			if iattrib.name in attrib.affect or attrib.name in iattrib.dep:
+				iattrib.add(attrib)
+			if attrib.name in iattrib.affect or iattrib.name in attrib.dep:
+				attrib.add(iattrib)
+		if attrib.atype == 'item' and attrib.name in self.attrib:
+			self.attrib[attrib.name].rlevel += attrib.rlevel
+		else:
+			self.attrib[attrib.name] = attrib
+>>>>>>> origin/master
 		self.log.append('add %s %s'%(self.name, attrib.name))
 					
 	
