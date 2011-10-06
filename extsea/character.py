@@ -1,4 +1,4 @@
-from .attribute import *
+from attribute import *
 import random
 
 class Character:

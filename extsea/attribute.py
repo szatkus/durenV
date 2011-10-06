@@ -76,12 +76,12 @@ class Attribute(object):
 		else:
 			return -1
 	
-	@property
-	def exp(self):
+	
+	def getexp(self):
 		return self.__exp
 	
-	@exp.setter
-	def exp(self, exp):
+	
+	def setexp(self, exp):
 		for d in self.dep:
 			if isinstance(d, Attribute):
 				d.exp += exp - self.__exp
@@ -92,6 +92,8 @@ class Attribute(object):
 			self.rlevel += 1
 			self.log.append('level %s %d'%(self.name, self.rlevel))
 	
+        #Python 2.5
+        exp = property(getexp, setexp)
 	def increase(self):
 		'''Increase exp slightly'''
 		self.exp += 1
